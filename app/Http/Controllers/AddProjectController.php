@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class AddProjectController extends Controller
 {
     public function index() {
-        return view('addproject');
+        return view('project.addproject');
     }
 
     public function store(Request $request) {
@@ -41,19 +41,20 @@ class AddProjectController extends Controller
         return view('project.updateproject', compact('projects'));
     }
 
-    public function update(Request $request) {
-        $this->validate($request, [
-            'nama_projek' => 'required | max:255',
-            'keterangan' => 'required',
-            'status' => 'required'
-        ]);
+    public function update(Request $request, $id) {
+        $projects = Project::find($id);
+        $projects->nama_projek = $request->nama_projek;
+        $projects->keterangan = $request->keterangan;
+        $projects->status = $request->status;
+        $projects->save();
 
-        DB::table('projects')->where('id', $request->id)->update([
-            'nama_projek' => $request->nama_projek,
-            'keterangan' => $request->keterangan,
-            'status' => $request->status
-            ]);
+         return redirect('/home');
+    }
 
-        return redirect()->intended('/home');
+    public function delete($id) {
+        $projects = Project::find($id);
+        $projects->delete();
+
+        return redirect('/home');
     }
 }

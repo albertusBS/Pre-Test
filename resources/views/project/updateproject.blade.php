@@ -3,7 +3,7 @@
 @section('container')
 <h2 class="text-center">Update projek</h2>
 
-<form class="col-sm" method="POST" action="/project/updateproject">
+<form class="col-sm" method="POST" action="/project/updateproject/{{ $projects->id }}">
     @csrf
     @method('put')
     <div class="mb-3 col-sm">
@@ -19,7 +19,7 @@
         <input type="text" class="form-control" id="status" name="status" placeholder="Status" value="{{ $projects->status }}">
     </div>
 
-    <button class="btn btn-primary" type="submit" value="submit">Update project</button>
+    <button class="btn btn-primary" type="submit">Update project</button>
 </form>
 
 @endsection

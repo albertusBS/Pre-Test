@@ -16,12 +16,19 @@ use GuzzleHttp\Middleware;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function(){
+    return view('welcome');
+});
+
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/home', [ProjectController::class, 'show'])->middleware('auth');
 
-Route::get('/tambahproject', [AddProjectController::class, 'store'])->middleware('auth');
+Route::get('/project/addproject', [AddProjectController::class, 'index'])->middleware('auth');
+Route::post('/project/addproject', [AddProjectController::class, 'store']);
+
 Route::get('/project/updateproject/{id}', [AddProjectController::class, 'edit']);
-Route::put('/project/updateproject', [AddProjectController::class, 'update']);
+Route::put('/project/updateproject/{id}', [AddProjectController::class, 'update']);
+Route::get('/hapus/{id}', [AddProjectController::class, 'delete']);

@@ -3,7 +3,7 @@
 @section('container')
 <h2 class="text-center">Tambah projek</h2>
 
-<form class="col-sm" method="POST" action="/tambahproject">
+<form class="col-sm" method="POST" action="/project/addproject">
     @csrf
     <div class="mb-3 col-sm">
         <label for="nama_projek" class="form-label">Nama Projek</label>
